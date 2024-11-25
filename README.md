@@ -34,46 +34,30 @@ The smart contract is deployed on the Avalanche Fuji Testnet, and all transactio
 
 ### 1. Mint Tokens
 Mint tokens to an address (owner-only function):
-```javascript
-await contract.mint("0xYourAddress", 500); // Mint 500 SCT tokens to your address.
-```
+
 This transaction is visible on **Snowtrace**.
 
 ### 2. View Available Items
 Retrieve the list of items available for redemption:
-```javascript
-const items = await contract.getAvailableItems();
-console.log(items); // Displays the available items.
-```
+
 
 ### 3. Redeem Items
 Redeem tokens for an item using the `redeemItem` function:
-```javascript
-await contract.redeemItem(1); // Redeem the first item in the store.
-```
+
 Transaction details, including the token burn, are visible on **Snowtrace**.
 
 ### 4. Transfer Tokens
 Transfer tokens to another user:
-```javascript
-await contract.transferTokens("0xRecipientAddress", 100); // Transfer 100 tokens.
-```
+
 The transfer can be verified on **Snowtrace**.
 
 ### 5. Use the Counter
 Increment or decrement the counter:
-```javascript
-await contract.incrementCounter(); // Increment the counter.
-await contract.decrementCounter(); // Decrement the counter.
-const counterValue = await contract.getCounter();
-console.log(counterValue); // Retrieve the counter value.
-```
+
 
 ### 6. Burn Tokens
 Burn tokens from your balance:
-```javascript
-await contract.burnTokens(50); // Burn 50 tokens from your balance.
-```
+
 This transaction will also appear on **Snowtrace**.
 
 ## Example Store Items
