@@ -1,41 +1,100 @@
-# Project Title
+# Simple Counter Token (SCT)
 
-Simple overview of use/purpose.
+The **Simple Counter Token (SCT)** is a custom ERC20 token designed to work on the Avalanche Fuji Testnet. It supports token minting, transferring, and burning while incorporating an in-game store feature that allows users to redeem tokens for items. The contract also includes a counter feature to track incremental changes, which can be used in games or other applications.
 
-## Description
+## Features
 
-An in-depth paragraph about your project and overview of use.
+- **Token Management**
+  - Mint new tokens (Owner-only).
+  - Transfer tokens between users.
+  - Burn tokens from the user's balance.
 
-## Getting Started
+- **In-Game Store**
+  - Redeem tokens for in-game items.
+  - View a list of available items in the store.
+  - Track items redeemed by the user.
 
-### Installing
+- **Counter Functionality**
+  - Increment and decrement the counter.
+  - Retrieve the current counter value.
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+- **Zero Decimals**
+  - Tokens are non-fractional, ensuring only whole numbers are used.
 
-### Executing program
+## Deployment
 
-* How to run the program
-* Step-by-step bullets
+The smart contract is deployed on the Avalanche Fuji Testnet, and all transactions can be verified on the [Snowtrace Explorer](https://testnet.snowtrace.io/).
+
+### Contract Address
 ```
-code blocks for commands
+0xD2075459E4748264aA714D672f7d5268C49A91af
 ```
 
-## Help
+## How to Use
 
-Any advise for common problems or issues.
+### 1. Mint Tokens
+Mint tokens to an address (owner-only function):
+```javascript
+await contract.mint("0xYourAddress", 500); // Mint 500 SCT tokens to your address.
 ```
-command to run if program contains helper info
+This transaction is visible on **Snowtrace**.
+
+### 2. View Available Items
+Retrieve the list of items available for redemption:
+```javascript
+const items = await contract.getAvailableItems();
+console.log(items); // Displays the available items.
 ```
 
-## Authors
+### 3. Redeem Items
+Redeem tokens for an item using the `redeemItem` function:
+```javascript
+await contract.redeemItem(1); // Redeem the first item in the store.
+```
+Transaction details, including the token burn, are visible on **Snowtrace**.
 
-Contributors names and contact info
+### 4. Transfer Tokens
+Transfer tokens to another user:
+```javascript
+await contract.transferTokens("0xRecipientAddress", 100); // Transfer 100 tokens.
+```
+The transfer can be verified on **Snowtrace**.
 
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
+### 5. Use the Counter
+Increment or decrement the counter:
+```javascript
+await contract.incrementCounter(); // Increment the counter.
+await contract.decrementCounter(); // Decrement the counter.
+const counterValue = await contract.getCounter();
+console.log(counterValue); // Retrieve the counter value.
+```
 
+### 6. Burn Tokens
+Burn tokens from your balance:
+```javascript
+await contract.burnTokens(50); // Burn 50 tokens from your balance.
+```
+This transaction will also appear on **Snowtrace**.
+
+## Example Store Items
+The contract includes predefined items in the in-game store:
+- Item A: 100 tokens
+- Item B: 200 tokens
+
+Additional items can be added by the contract owner using the `addItem` function.
+
+## Technical Details
+- **Programming Language:** Solidity
+- **Compiler Version:** 0.8.18
+- **Frameworks Used:** OpenZeppelin (ERC20 and Ownable modules)
+
+## Notes
+- The token contract overrides the `decimals()` function to enforce zero decimals.
+- Administrative functions (e.g., minting tokens, adding items) are restricted to the contract owner.
+
+## Transaction Verification
+All transactions, including minting, transfers, item redemptions, and token burns, can be viewed transparently on the Avalanche Fuji Testnet using **Snowtrace**. This ensures trust and accountability.
 
 ## License
+This project is licensed under the MIT License.
 
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
